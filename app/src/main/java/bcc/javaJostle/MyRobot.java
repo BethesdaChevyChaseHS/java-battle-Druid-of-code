@@ -23,5 +23,26 @@ public class MyRobot extends Robot{
          only shoot when canAttack() is true!
         */
        // System.out.println("Thinking...");
+       double rand = Math.random();
+       if(rand < 0.25){
+        xMovement = 1;
+       }
+       else if(rand < 0.5){
+        xMovement = -1;
+       }
+       else if(rand < 0.75){
+        yMovement = 1;
+       }
+       else{
+        yMovement = -1;
+       }
+       if(canAttack()){
+            for(Robot robot : robots) {
+                if (robot != this && robot.isAlive() ){
+                    shootAtLocation(robot.getX() + Utilities.ROBOT_SIZE/2, robot.getY() + Utilities.ROBOT_SIZE/2);
+                    break; // Shoot at the first target found
+                }
+            }
+        }
     }
 }
