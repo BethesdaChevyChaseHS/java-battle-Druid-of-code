@@ -1,9 +1,16 @@
 package bcc.javaJostle;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 public class MyRobot extends Robot{
+    private int timer;
+    private double rand;
+    private String ans;
     public MyRobot(int x, int y){
-        super(x, y, 3, 3, 2, 2,"bob", "myRobotImage.png", "defaultProjectileImage.png");
+        super(x, y, 4, 2, 2, 2,"bob", "myRobotImage.png", "defaultProjectileImage.png");
+        timer = 0;
+        rand = 0;
+        ans = "";
         // Health: 3, Speed: 3, Attack Speed: 2, Projectile Strength: 2
         // Total = 10
         // Image name is "myRobotImage.png"
@@ -23,18 +30,21 @@ public class MyRobot extends Robot{
          only shoot when canAttack() is true!
         */
        // System.out.println("Thinking...");
-       double rand = Math.random();
-       if(rand < 0.25){
+       timer++;
+       if(timer % 100 == 0){
+        rand = Math.random();
+       }
+       if(rand < 0.250){
         xMovement = 1;
        }
-       else if(rand < 0.5){
+       else if(rand < 0.500){
+        yMovement = -1;
+       }
+       else if(rand < 0.750){
         xMovement = -1;
        }
-       else if(rand < 0.75){
-        yMovement = 1;
-       }
        else{
-        yMovement = -1;
+        yMovement = 1;
        }
        if(canAttack()){
             for(Robot robot : robots) {
